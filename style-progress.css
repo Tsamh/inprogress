@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+@font-face {
+    font-family: 'Police';
+    src: url('Kraken-X3wwK.ttf') format('truetype');
+}
+
+body {
+  background: linear-gradient(#DE0606, #fff);
+  font-family: 'Police', sans-serif;
+  }
+  
+  .dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .dots .loader {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 20px;
+  }
+  
+  .loader .loading {
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin: 0 10px;
+    animation: load 0.8s ease infinite;
+  }
+  
+  .loader .loading.one {
+    animation-delay: 0.3s;
+  }
+  .loader .loading.two {
+    animation-delay: 0.4s;
+  }
+  /* .loader .loading.three {
+    animation-delay: 0.5s;
+  } */
+  
+  @keyframes load {
+    0% {
+      width: 30px;
+      height: 30px;
+    }
+    50% {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+       
+  }
