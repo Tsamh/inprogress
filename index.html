@@ -8,6 +8,9 @@
 </head>
 <body>
   <a class="cv-button" href="CV_Samba_Hama_TRAORE_Data_Engineer.pdf" download>Download CV</a>
+  <div class="cv-preview">
+    <iframe src="CV_Samba_Hama_TRAORE_Data_Engineer.pdf" title="CV"></iframe>
+  </div>
   <section class="dots">
       <h1>In construction... &nbsp; Come back later</h1>
         <div class="loader">
@@ -16,5 +19,27 @@
           <div class="loading three"></div>
         </div>
       </section>
+
+  <script>
+    const cvButton = document.querySelector('.cv-button');
+    const cvPreview = document.querySelector('.cv-preview');
+
+    // 1er clic : on affiche le CV. 2e clic : le telechargement se fait normalement.
+    cvButton.addEventListener('click', (event) => {
+      if (!cvPreview.classList.contains('open')) {
+        event.preventDefault();
+        cvPreview.classList.add('open');
+        cvButton.textContent = 'Download';
+      }
+    });
+
+    // Clic en dehors du CV : on ferme l'apercu.
+    cvPreview.addEventListener('click', (event) => {
+      if (event.target === cvPreview) {
+        cvPreview.classList.remove('open');
+        cvButton.textContent = 'Download CV';
+      }
+    });
+  </script>
 </body>
 </html>
