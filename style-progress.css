@@ -10,8 +10,89 @@
 }
 
 body {
-  background: linear-gradient(#DE0606, #fff);
+  background: #4a0101;
   font-family: 'Police', sans-serif;
+  }
+
+  /* Repli : plis de rideau en CSS, visibles si la video ne se charge pas */
+  body::before {
+    content: '';
+    position: fixed;
+    /* on depasse des bords pour qu'aucun cote ne se decouvre pendant l'ondulation */
+    inset: -4% -8%;
+    z-index: -2;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.55) 0,
+        rgba(0, 0, 0, 0.18) 1.2%,
+        rgba(255, 255, 255, 0.14) 2.6%,
+        rgba(0, 0, 0, 0.18) 4%,
+        rgba(0, 0, 0, 0.55) 5.2%
+      ),
+      linear-gradient(
+        90deg,
+        #3d0000 0%,
+        #9e0505 12%,
+        #5a0101 26%,
+        #c00a0a 42%,
+        #5d0101 58%,
+        #b60808 74%,
+        #4c0000 88%,
+        #8c0404 100%
+      );
+  }
+
+  /* Rideau en video : occupe tout l'ecran, par-dessus les plis CSS qui
+     restent visibles en repli si la video ne se charge pas. */
+  .curtain-video {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .curtain-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Ombre de la tringle en haut, poids du tissu en bas, reflet mouvant */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 70% at 50% -10%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 60%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 22%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 26%);
+    background-size: 160% 100%, 100% 100%, 100% 100%;
+    background-position: 20% 0, 0 0, 0 0;
+    animation: curtain-sheen 11s ease-in-out infinite alternate;
+  }
+
+  @keyframes curtain-sheen {
+    0% {
+      background-position: 12% 0, 0 0, 0 0;
+    }
+    100% {
+      background-position: 88% 0, 0 0, 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::after {
+      animation: none;
+    }
+
+    /* pas d'image en mouvement : on garde le rideau CSS, fixe */
+    .curtain-video {
+      display: none;
+    }
   }
   
   .dots {
